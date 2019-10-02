@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import People from './People';
+import People from './containers/People';
 
 const url = 'https://api.salesloft.com/v2/people';
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
@@ -33,10 +33,10 @@ class App extends Component {
     })
   }
 
+
   render(){
-    console.log(API_KEY)
     return(
-      <div>
+      <div className="app">
         <People peopleData={this.state.people} />
       </div>
     )
