@@ -4,7 +4,7 @@ import People from './People';
 
 const url = 'https://api.salesloft.com/v2/people';
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-const key = ''
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 
 class App extends Component {
@@ -22,7 +22,7 @@ class App extends Component {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${key}`,
+        'Authorization': `Bearer ${API_KEY}`,
       }
     })
     .then(res => res.json())
@@ -34,7 +34,7 @@ class App extends Component {
   }
 
   render(){
-    console.log(this.state)
+    console.log(API_KEY)
     return(
       <div>
         <People peopleData={this.state.people} />

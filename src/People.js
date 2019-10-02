@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import Person from './Person'
+// import PeopleTable from './PeopleTable';
 
 class People extends Component {
     state = {
         people: [],
-        toggle: false
+        toggle: false,
+        chars: [],
+        counts: [],
+        charMap: {}
     }
 
     countChar = () => {
@@ -17,14 +21,24 @@ class People extends Component {
             charMap[everyCharArr[i]]?  charMap[everyCharArr[i]] +=1 : charMap[everyCharArr[i]] = 1
         }
 
+        const chars = Object.keys(charMap);
+        const counts = Object.values(charMap);
+        const charObj = Object.entries(charMap)
         
+
+        this.setState(prevState => ({
+            toggle: !prevState.toggle,
+            chars: chars,
+            counts: counts,
+            charMap: charObj
+        }))
         
 
     }
 
     render(){
         let people = this.props.peopleData.data ? this.props.peopleData.data : null
-        console.log(this.props.peopleData.data)
+        // this.state.charMap.forEach((entry) => console.log(entry[0], entry[1]))
 
         return(
             <div>
@@ -37,6 +51,18 @@ class People extends Component {
                             <h3><button className="waves-effect waves-light btn-large" onClick={this.countChar}> Show me unique characters! </button></h3>
                         </div>
                     </div>
+                    {this.state.toggle?  this.state.charMap.forEach((entry) => <div>{entry[0]}</div>)
+                   
+                //    <table>
+                //     <thead>
+                //       <tr>
+                //           <th>Character</th>
+                //           <th>Count</th>
+                //       </tr>
+                //     </thead>
+                //   </table>
+                    :
+            null}
                     <div>
                     <table>
         <thead>
@@ -51,9 +77,19 @@ class People extends Component {
 
                      {people ? people.map(person => { return <div> <Person key={person.id} personInfo={person} /></div>}) : null}
                 </div>
+                
             </div>
         )
     }
 }
 
 export default People;
+
+
+
+
+
+
+
+
+
